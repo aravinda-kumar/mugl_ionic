@@ -4,11 +4,11 @@ import { StatusBar } from 'ionic-native';
 
 import { HomePage } from './pages/home/home';
 
-import {NoteService} from './providers/note-service/note-service';
+import {ItemService} from './providers/item-service/item-service';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [NoteService]
+  providers: [ItemService]
 })
 export class MyApp {
   rootPage: any = HomePage;

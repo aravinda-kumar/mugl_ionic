@@ -5,7 +5,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button (click)="addNote()">
+      <button (click)="addItem()">
       <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,8 +14,8 @@
 
 <ion-content padding>  
   <ion-list>
-    <ion-item-sliding  *ngFor="#item of notes" >    
-      <button ion-item (click)="noteSelected(item)">
+    <ion-item-sliding  *ngFor="#item of items" >    
+      <button ion-item (click)="itemSelected(item)">
         <ion-item-content>
           <h2>{{item.title}}</h2>
           <p>{{item.text}}</p>
@@ -23,7 +23,7 @@
       </button>
 
       <ion-item-options>
-        <button danger (click)="removeNote(item)"><ion-icon name="trash"></ion-icon> Delete</button>
+        <button danger (click)="removeItem(item)"><ion-icon name="trash"></ion-icon> Delete</button>
       </ion-item-options>
     </ion-item-sliding>
 
