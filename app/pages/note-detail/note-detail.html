@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar primary>  
+    <ion-title>
+    {{note.title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="details">
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" value="" placeholder="Item Title" [(ngModel)]="note.title"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <textarea rows="15" placeholder="Details" style="width: 100%; border: none;" [(ngModel)]="note.text">
+  </textarea>  
+</ion-content>
