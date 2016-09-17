@@ -1,11 +1,11 @@
 MUGL - Multi-Up Grocery List
 =========
 
-A work in progress! MUGL will eventually implement a very useful spin on grocery shopping and general list making.
-
-100% F/LOSS software, MIT licensed (see MIT License.txt). Copy/modify at will!
+MUGL aims to provide a useful spin on grocery shopping and general list making.
 
 * [Google Play Store](https://play.google.com/store/apps/details?id=com.onebillionsaved.mugl)
+
+100% F/LOSS software, MIT licensed (see MIT License.txt). Copy/modify at will!
 
 Contributors
 ---------
