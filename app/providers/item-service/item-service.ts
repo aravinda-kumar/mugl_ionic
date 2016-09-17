@@ -15,15 +15,20 @@ export class ItemService {
   
   storage: Storage = null;
 
-  // Init an empty DB if it does not exist by now!
+  // Init an empty DB if it does not exist
   constructor() {
     this.storage = new Storage(SqlStorage);
     this.storage.query('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT)');
   }
 
-  // Get all items of our DB
+  // Get all items from our DB
   public getItems() {
     return this.storage.query('SELECT * FROM items');
+  }
+
+   // Get all items from our DB, sorted
+  public getSortedItems() {
+    return this.storage.query('SELECT * FROM items ORDER BY text');
   }
 
   // Save a new item to the DB
@@ -38,10 +43,15 @@ export class ItemService {
     this.storage.query(sql);
   }
 
-  // Remoe a not with a given ID
+  // Remove an item with a given ID
   public removeItem(item: Item) {
     let sql = 'DELETE FROM items WHERE id = \"' + item.id + '\"';
     this.storage.query(sql);
   }
   
+  // Remove all items
+  public removeAllItems() {
+    let sql = 'DELETE FROM items';
+    this.storage.query(sql);
+  }
 }
