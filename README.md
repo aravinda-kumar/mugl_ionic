@@ -7,7 +7,7 @@ A work in progress! MUGL will eventually implement a very useful spin on grocery
 
 * [Google Play Store](https://play.google.com/store/apps/details?id=com.onebillionsaved.mugl)
 
- Contributors
+Contributors
 ---------
 
 A special thanks to all that have helped, and continue to motivate:
@@ -27,7 +27,7 @@ After setting up your Ionic environment
 		$ npm install
 		$ ionic run android # or ionic emulate ios
 
- Changelog
+Changelog
 ---------
 
 Recent changes:
