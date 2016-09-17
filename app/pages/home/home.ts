@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Page, NavController } from 'ionic-angular';
+import { Page, NavController, AlertController } from 'ionic-angular';
 import {ItemDetailPage} from '../item-detail/item-detail';
 import {ItemService, Item} from '../../providers/item-service/item-service';
 
@@ -10,7 +10,7 @@ export class HomePage {
 
   items: Item[];
 
-  constructor(public nav: NavController, public itemService: ItemService) {}
+  constructor(public nav: NavController, public itemService: ItemService, public alerCtrl: AlertController) {}
 
   // Initialise the items by loading data from our DB
   private loadItems() {
@@ -45,11 +45,50 @@ export class HomePage {
   // Load our todos once the page appears
   private onPageDidEnter() {
     this.loadItems();
-  }
-  
+  }  
 
    // Push the details page bute without an existing item
   public addItem() {
     this.nav.push(ItemDetailPage);
   }
+
+  doPrompt() {
+    let prompt = this.alerCtrl.create({
+      title: 'New Item',
+      message: "Enter an item for the list",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Title'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked');
+
+            let item = new Item('', '', null);
+            item.text = data.title;
+            item.title = data.title;
+
+            this.itemService.saveItem(item).then((data) => {
+                  // Set the automatic created id to our item
+                  item.id = data.res["insertId"];
+                  this.loadItems();
+                });
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+
 }
