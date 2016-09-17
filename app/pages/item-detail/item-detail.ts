@@ -21,7 +21,7 @@ export class ItemDetailPage {
 
 
   // Save our item to the DB and show a message (optional)
-  public saveNote(showBadge: boolean = false) {
+  public saveNote() {
     if (this.item.id === null) {
       this.itemService.saveItem(this.item).then((data) => {
         // Set the automatic created id to our item
@@ -29,19 +29,12 @@ export class ItemDetailPage {
       });
     } else {
       this.itemService.updateItem(this.item);
-    }
-    if (showBadge) {
-     /* let toast = Toast.create({
-        message: 'Note saved',
-        duration: 3000
-      });
-      this.nav.present(toast); */
-    }
+    }    
   }
 
   // Called when this page is popped from the nav stack
   private onPageWillUnload() {
-    this.saveNote(true);
+    this.saveNote();
   }
   
 }

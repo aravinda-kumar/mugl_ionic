@@ -8,7 +8,7 @@ import {ItemService, Item} from '../../providers/item-service/item-service';
 })
 export class HomePage {
 
-  items: Item[];
+  items: Item[];  
 
   constructor(public nav: NavController, public itemService: ItemService, public alerCtrl: AlertController) {}
 
@@ -29,7 +29,8 @@ export class HomePage {
 
   // Push the details page for our selected Item
   public itemSelected(item: Item) {
-    this.nav.push(ItemDetailPage, {'item': item});
+    //this.nav.push(ItemDetailPage, {'item': item});
+    this.updatePrompt(item);
   }
 
   // Remove the item from the DB and our current arra
@@ -66,13 +67,11 @@ export class HomePage {
         {
           text: 'Cancel',
           handler: data => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: 'Save',
           handler: data => {
-            console.log('Saved clicked');
 
             let item = new Item('', '', null);
             item.text = data.title;
@@ -90,5 +89,42 @@ export class HomePage {
     prompt.present();
   }
 
+
+  updatePrompt(item: Item) {
+    let prompt = this.alerCtrl.create({
+      title: 'New Item',
+      message: "Enter an item for the list",
+      inputs: [
+        {
+          name: 'title',          
+          value: item.text
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {            
+            item.text = data.title;
+            item.title = data.title;
+
+            this.itemService.saveItem(item).then((data) => {
+                  this.itemService.updateItem(item);
+                  
+                  // Set the automatic created id to our item
+                  item.id = data.res["insertId"];
+                  this.loadItems();
+                });
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+   
 
 }
