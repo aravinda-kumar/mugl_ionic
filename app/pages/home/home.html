@@ -16,9 +16,8 @@
   <ion-list>
     <ion-item-sliding  *ngFor="#item of items" >    
       <button ion-item (click)="itemSelected(item)">
-        <ion-item-content>
-          <h2>{{item.title}}</h2>
-          <p>{{item.text}}</p>
+        <ion-item-content>          
+          <h2>{{item.text}}</h2>
         </ion-item-content>
       </button>
 

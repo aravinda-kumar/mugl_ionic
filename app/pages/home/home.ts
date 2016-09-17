@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Page, NavController, AlertController } from 'ionic-angular';
-import {ItemDetailPage} from '../item-detail/item-detail';
 import {ItemService, Item} from '../../providers/item-service/item-service';
 
 @Page({
@@ -21,15 +20,13 @@ export class HomePage {
         if (data.res.rows.length > 0) {
           for (var i = 0; i < data.res.rows.length; i++) {
             let item = data.res.rows.item(i);
-            this.items.push(new Item(item.title, item.text, item.id));
+            this.items.push(new Item(item.text, item.id));
           }
         }
       });
   }
-
-  // Push the details page for our selected Item
+  
   public itemSelected(item: Item) {
-    //this.nav.push(ItemDetailPage, {'item': item});
     this.updatePrompt(item);
   }
 
@@ -48,18 +45,13 @@ export class HomePage {
     this.loadItems();
   }  
 
-   // Push the details page bute without an existing item
-  public addItem() {
-    this.nav.push(ItemDetailPage);
-  }
-
   doPrompt() {
     let prompt = this.alerCtrl.create({
       title: 'New Item',
       message: "Enter an item for the list",
       inputs: [
         {
-          name: 'title',
+          name: 'text',
           placeholder: 'Title'
         },
       ],
@@ -73,9 +65,8 @@ export class HomePage {
           text: 'Save',
           handler: data => {
 
-            let item = new Item('', '', null);
-            item.text = data.title;
-            item.title = data.title;
+            let item = new Item('', null);
+            item.text = data.text;
 
             this.itemService.saveItem(item).then((data) => {
                   // Set the automatic created id to our item
@@ -89,14 +80,13 @@ export class HomePage {
     prompt.present();
   }
 
-
   updatePrompt(item: Item) {
     let prompt = this.alerCtrl.create({
-      title: 'New Item',
-      message: "Enter an item for the list",
+      title: 'Edit Item',
+      message: "Edit list item",
       inputs: [
         {
-          name: 'title',          
+          name: 'text',          
           value: item.text
         },
       ],
@@ -109,16 +99,10 @@ export class HomePage {
         {
           text: 'Save',
           handler: data => {            
-            item.text = data.title;
-            item.title = data.title;
-
-            this.itemService.saveItem(item).then((data) => {
-                  this.itemService.updateItem(item);
-                  
-                  // Set the automatic created id to our item
-                  item.id = data.res["insertId"];
-                  this.loadItems();
-                });
+            item.text = data.text;
+            
+            this.itemService.updateItem(item);                
+            this.loadItems();                
           }
         }
       ]
@@ -126,5 +110,4 @@ export class HomePage {
     prompt.present();
   }
    
-
 }
