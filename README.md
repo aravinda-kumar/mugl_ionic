@@ -1,23 +1,34 @@
 MUGL - Multi-Up Grocery List
-by Luke Prince
+=========
 
-A work in progress! Rolling releases as time allows :).
+A work in progress! MUGL will eventually implement a very useful spin on grocery shopping and general list making.
 
-100% F/LOSS software, MIT licensed (see license.txt). Copy/modify at will!
+100% F/LOSS software, MIT licensed (see MIT License.txt). Copy/modify at will!
 
---------------
+* [Google Play Store](https://play.google.com/store/apps/details?id=com.onebillionsaved.mugl)
+
  Contributors
---------------
+---------
 
-~~~> a special thanks to all that have helped, and continue to motivate <~~~
+A special thanks to all that have helped, and continue to motivate:
 
-1) Jerry & Cynthia McDaniel - hardware donation.
-2) Summer Olmstead - pair coding and brain storming.
-3) Jon McCord - MUGL icons and ideas.
+1. Jerry & Cynthia McDaniel - hardware donation.
+2. Summer Prince - pair coding, brain storming, daily inspiration.
+3. Jon McCord - MUGL icons and ideas.
 
------------
+Building MUGL
+---------
+
+After setting up your Ionic environment
+1. Download/unzip source.
+2. Run following commands in a terminal:
+
+		$ cd mugl_ionic
+		$ npm install
+		$ ionic run android # or ionic emulate ios
+
  Changelog
------------
+---------
 
 Recent changes:
 
@@ -62,4 +73,3 @@ v0.04: Added "About" dialog to app menu.
 v0.03: Persistent item strikethrough implemented, code optimizations.
 
 v0.01: Application icon prettified.
-
