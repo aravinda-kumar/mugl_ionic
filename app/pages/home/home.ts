@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Page, NavController, AlertController } from 'ionic-angular';
 import {ItemService, Item} from '../../providers/item-service/item-service';
+import {AboutPage} from '../about/about';
 
 @Page({
   templateUrl: 'build/pages/home/home.html'
@@ -65,6 +66,11 @@ export class HomePage {
   private onPageDidEnter() {
     this.loadItems();
   }  
+
+   // Push the about page
+  public about() {
+    this.nav.push(AboutPage);
+  }
 
   doPrompt() {
     let prompt = this.alerCtrl.create({
