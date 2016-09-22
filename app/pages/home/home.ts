@@ -94,7 +94,8 @@ export class HomePage {
 
             let item = new Item('', null);
 
-            if (data.text.length !== 0) {
+            if (/\S/.test(data.text)) {
+              // use regex to check that at least one non-whitespace char is present
               item.text = data.text;
 
               this.itemService.saveItem(item).then((data) => {
