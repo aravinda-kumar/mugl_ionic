@@ -93,13 +93,16 @@ export class HomePage {
           handler: data => {
 
             let item = new Item('', null);
-            item.text = data.text;
 
-            this.itemService.saveItem(item).then((data) => {
-                  // Set the automatically created id to our item
-                  item.id = data.res["insertId"];
-                  this.loadItems();
-                });
+            if (data.text.length !== 0) {
+              item.text = data.text;
+
+              this.itemService.saveItem(item).then((data) => {
+                    // Set the automatically created id to our item
+                    item.id = data.res["insertId"];                    
+                  });
+            }
+            this.loadItems();
           }
         }
       ]
