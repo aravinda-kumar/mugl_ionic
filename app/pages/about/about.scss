@@ -6,6 +6,12 @@
         transform: translate(-50%, -50%);
     }
 
+    @mixin rounded($radius: 0.5em) {
+        -webkit-border-radius: $radius;
+        -moz-border-radius: $radius;
+        border-radius: $radius;
+    }
+
     .parent {
         position: relative;
         background: #006600;
@@ -15,6 +21,7 @@
     }
     .child {
         @include centerer;
+        @include rounded;
         background: white;
         padding: 10px;
         width: 90%;
