@@ -21,7 +21,7 @@ export class HomePage {
         if (data.res.rows.length > 0) {
           for (var i = 0; i < data.res.rows.length; i++) {
             let item = data.res.rows.item(i);
-            this.items.push(new Item(item.text, item.id));
+            this.items.push(new Item(item.text, item.id, item.checked));
           }
         }
       });
@@ -36,7 +36,7 @@ export class HomePage {
         if (data.res.rows.length > 0) {
           for (var i = 0; i < data.res.rows.length; i++) {
             let item = data.res.rows.item(i);
-            this.items.push(new Item(item.text, item.id));
+            this.items.push(new Item(item.text, item.id, item.checked));
           }
         }
       });
@@ -72,6 +72,11 @@ export class HomePage {
     this.nav.push(AboutPage);
   }
 
+  checkItem(item: Item) {
+    this.itemService.toggleCheckedItem(item);                
+    // this.loadItems();         
+  }
+
   doPrompt() {
     let prompt = this.alerCtrl.create({
       title: 'New Item',
@@ -92,7 +97,7 @@ export class HomePage {
           text: 'Save',
           handler: data => {
 
-            let item = new Item('', null);
+            let item = new Item('', null, 0);
 
             if (/\S/.test(data.text)) {
               // use regex to check that at least one non-whitespace char is present
@@ -162,4 +167,12 @@ export class HomePage {
     prompt.present();
   }
    
+
+   getStyle(item: Item) {
+    if(item.checked === 0){
+      return "red";
+    } else {
+      return "green";
+    }
+  }
 }

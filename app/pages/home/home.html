@@ -24,9 +24,10 @@
 <ion-content padding>  
   <ion-list>
     <ion-item-sliding  *ngFor="#item of items" >    
-      <button ion-item (click)="itemSelected(item)">
+      <!--<button ion-item (click)="itemSelected(item)">-->
+        <button ion-item (click)="checkItem(item)">
         <ion-item-content>          
-          <h2>{{item.text}}</h2>
+          <h1 [style.color]="getStyle(item)">{{item.text}}</h1>
         </ion-item-content>
       </button>
 

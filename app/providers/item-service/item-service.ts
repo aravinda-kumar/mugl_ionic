@@ -4,9 +4,11 @@ import {Injectable} from '@angular/core';
 export class Item {
   text: string;
   id: number;
-  constructor(text: string, id: number) {
+  checked: number;
+  constructor(text: string, id: number, checked: number) {
     this.text = text;
     this.id = id;
+    this.checked = checked;
   }
 }
 
@@ -18,7 +20,11 @@ export class ItemService {
   // Init an empty DB if it does not exist
   constructor() {
     this.storage = new Storage(SqlStorage);
-    this.storage.query('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT)');
+    this.storage.query(`CREATE TABLE IF NOT EXISTS items (
+                       id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                       text TEXT,
+                       checked INTEGER
+                       )`);
   }
 
   // Get all items from our DB
@@ -33,13 +39,24 @@ export class ItemService {
 
   // Save a new item to the DB
   public saveItem(item: Item) {
-    let sql = 'INSERT INTO items (text) VALUES (?)';
-    return this.storage.query(sql, [item.text]);
+    let sql = 'INSERT INTO items (text, checked) VALUES (?, ?)';
+    return this.storage.query(sql, [item.text, 0]);
   }
 
   // Update an existing item with a given ID
   public updateItem(item: Item) {
     let sql = 'UPDATE items SET text = \"' + item.text + '\" WHERE id = \"' + item.id + '\"';
+    this.storage.query(sql);
+  }
+
+  public toggleCheckedItem(item: Item) {
+    if (item.checked === 0) {
+      item.checked = 1;
+    } else {
+      item.checked = 0;
+    }
+
+    let sql = 'UPDATE items SET checked = \"' + item.checked + '\" WHERE id = \"' + item.id + '\"';
     this.storage.query(sql);
   }
 
