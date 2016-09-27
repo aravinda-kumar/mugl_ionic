@@ -167,8 +167,7 @@ export class HomePage {
     prompt.present();
   }
    
-
-   getStyle(item: Item) {
+  getStyle(item: Item) {
     if(item.checked === 0){
       return "red";
     } else {
