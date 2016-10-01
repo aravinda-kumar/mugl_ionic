@@ -1,36 +1,39 @@
 import { Component } from '@angular/core';
-import { Page, NavController, AlertController } from 'ionic-angular';
-import {ItemService, Item} from '../../providers/item-service/item-service';
+import { NavController, AlertController } from 'ionic-angular';
 import {AboutPage} from '../about/about';
+import {Sql, Item} from "../../providers/sql";
 
-@Page({
-  templateUrl: 'build/pages/home/home.html'
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
 export class HomePage {
 
-  items: Item[];  
+    items: Item[]; 
+ 
+    public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
+              this.onPageDidEnter();
+    }
 
-  constructor(public nav: NavController, public itemService: ItemService, public alerCtrl: AlertController) {}
-
-  // Initialise the items by loading data from our DB
-  private loadItems() {
-    this.items = [];
-    this.itemService.getItems().then(
-      data => {
+        // Initialise the items by loading data from our DB
+    private loadItems() {
         this.items = [];
-        if (data.res.rows.length > 0) {
-          for (var i = 0; i < data.res.rows.length; i++) {
-            let item = data.res.rows.item(i);
-            this.items.push(new Item(item.text, item.id, item.checked));
-          }
-        }
-      });
-  }
-  
+        this.sql.getItems().then(
+        data => {
+            this.items = [];
+            if (data.res.rows.length > 0) {
+            for (var i = 0; i < data.res.rows.length; i++) {
+                let item = data.res.rows.item(i);
+                this.items.push(new Item(item.text, item.id, item.checked));
+            }
+            }
+        });
+    }
+
   // Looad sorted items from our DB
-  private loadSortedItems() {
+  public loadSortedItems() {
     this.items = [];
-    this.itemService.getSortedItems().then(
+    this.sql.getSortedItems().then(
       data => {
         this.items = [];
         if (data.res.rows.length > 0) {
@@ -48,7 +51,7 @@ export class HomePage {
 
   // Remove the item from the DB and our current array
   public removeItem(item: Item) {
-    this.itemService.removeItem(item);
+    this.sql.removeItem(item);
     let index = this.items.indexOf(item);
 
     if (index > -1) {
@@ -58,7 +61,7 @@ export class HomePage {
 
   // Remove all items from the DB and our current array
   public removeAllItems() {
-    this.itemService.removeAllItems();
+    this.sql.removeAllItems();
     this.items = [];
   }
 
@@ -69,11 +72,11 @@ export class HomePage {
 
    // Push the about page
   public about() {
-    this.nav.push(AboutPage);
+    this.navCtrl.push(AboutPage);
   }
 
   checkItem(item: Item) {
-    this.itemService.toggleCheckedItem(item);                
+    this.sql.toggleCheckedItem(item);                
     // this.loadItems();         
   }
 
@@ -103,9 +106,10 @@ export class HomePage {
               // use regex to check that at least one non-whitespace char is present
               item.text = data.text;
 
-              this.itemService.saveItem(item).then((data) => {
+              this.sql.saveItem(item).then((data) => {
                     // Set the automatically created id to our item
-                    item.id = data.res["insertId"];                    
+                    // item.id = data.res["insertId"];
+                    item.id = data.res["id"];                    
                   });
             }
             this.loadItems();
@@ -137,7 +141,7 @@ export class HomePage {
           handler: data => {            
             item.text = data.text;
             
-            this.itemService.updateItem(item);                
+            this.sql.updateItem(item);                
             this.loadItems();                
           }
         }

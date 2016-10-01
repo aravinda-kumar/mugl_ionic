@@ -1,36 +1,34 @@
 <ion-header>
-  <ion-navbar primary>
+  <ion-navbar color="primary">
     <ion-title>MUGL</ion-title>
 
     <ion-buttons end>
-      <button (click)="doPrompt()">
+      <button ion-button (click)="doPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
-      <button (click)="loadSortedItems()">
+      <button ion-button (click)="loadSortedItems()">
         <ion-icon name="funnel"></ion-icon>
       </button>
-      <button (click)="deletePrompt()">
+      <button ion-button (click)="deletePrompt()">
         <ion-icon name="trash"></ion-icon>
       </button>
-      <button (click)="about()">
+      <button ion-button (click)="about()">
         <ion-icon name="information"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>  
-  <ion-list>
-    <ion-item-sliding  *ngFor="#item of items" >    
+ 
+<ion-content padding>
+<ion-list>
+    <ion-item-sliding  *ngFor="let item of items" >    
       <button ion-item (click)="checkItem(item)">
-        <ion-item-content>          
           <h1 [style.color]="getStyle(item)">{{item.text}}</h1>
-        </ion-item-content>
       </button>
 
       <ion-item-options>
-        <button danger (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
-        <button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
+        <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
