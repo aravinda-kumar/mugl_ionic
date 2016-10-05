@@ -5,13 +5,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
     @mixin rounded($radius: 0.5em) {
         -webkit-border-radius: $radius;
         -moz-border-radius: $radius;
         border-radius: $radius;
     }
-
     .parent {
         position: relative;
         background: #5391F7;
