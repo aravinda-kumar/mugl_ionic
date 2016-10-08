@@ -9,26 +9,26 @@ import {Sql, Item} from "../../providers/sql";
 })
 export class HomePage {
 
-    items: Item[]; 
+  items: Item[]; 
  
-    public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
-              this.onPageDidEnter();
-    }
+  public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
+    this.onPageDidEnter();
+  }
 
-        // Initialise the items by loading data from our DB
-    private loadItems(): void {
-        this.items = [];
-        this.sql.getItems().then(
-        data => {
-            this.items = [];
-            if (data.res.rows.length > 0) {
-            for (var i = 0; i < data.res.rows.length; i++) {
-                let item = data.res.rows.item(i);
-                this.items.push(new Item(item.text, item.id, item.checked));
-            }
-            }
-        });
-    }
+  // Initialise the items by loading data from our DB
+  private loadItems(): void {
+    this.items = [];
+    this.sql.getItems().then(
+    data => {
+      this.items = [];
+      if (data.res.rows.length > 0) {
+        for (var i = 0; i < data.res.rows.length; i++) {
+          let item = data.res.rows.item(i);
+          this.items.push(new Item(item.text, item.id, item.checked));
+        }
+      }
+    });
+  }
 
   // Looad sorted items from our DB
   public loadSortedItems(): void {
@@ -101,8 +101,8 @@ export class HomePage {
 
             let item = new Item('', null, 0);
 
-            if (/\S/.test(data.text)) {
-              // use regex to check that at least one non-whitespace char is present
+            // use regex to check that at least one non-whitespace char is present
+            if (/\S/.test(data.text)) {              
               item.text = data.text;
 
               this.sql.saveItem(item).then((data) => {
