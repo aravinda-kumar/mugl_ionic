@@ -31,4 +31,4 @@ v1.0.0 16-09-15: Converted project to Ionic. Plan to slowly regain previous nati
 
 ## License
 
-MIT License (see MIT_License.txt).
+100% F/LOSS software, MIT licensed (see MIT_License.txt). Copy/modify at will!
