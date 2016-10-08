@@ -36,7 +36,7 @@ export class HomePage {
     this.updatePrompt(item);
   }
 
-  // Initialise the items by loading data from our DB
+  // Initialize the items by loading data from our DB
   private loadItems(): void {
     this.items = [];
     this.sql.getItems().then(

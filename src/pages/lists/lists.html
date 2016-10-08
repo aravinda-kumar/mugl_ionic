@@ -7,6 +7,9 @@
       <button ion-button (click)="newListPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
+      <button ion-button (click)="deleteAllPrompt()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 
@@ -19,10 +22,10 @@
           <h1>{{list.list_title}} {{list.id}}</h1>
       </button>
 
-      <!--<ion-item-options>
-        <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
-        <button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
-      </ion-item-options>-->
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deletePrompt(list)"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button (click)="listSelected(list)"><ion-icon name="create"></ion-icon>Edit</button>
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>

@@ -106,9 +106,21 @@ export class Sql {
     return this.query(sql);
   }
 
+  // Remove all items
+  public removeAllLists(): Promise<any> {
+    let sql = 'DELETE FROM lists';
+    return this.query(sql);
+  }
+
   // Remove an item with a given ID
   public removeItem(item: Item): Promise<any> {
     let sql = 'DELETE FROM items WHERE id = \"' + item.id + '\"';
+    return this.query(sql);
+  }
+
+  // Remove a list with a given ID
+  public removeList(list: List): Promise<any> {
+    let sql = 'DELETE FROM lists WHERE id = \"' + list.id + '\"';
     return this.query(sql);
   }
 
@@ -138,6 +150,12 @@ export class Sql {
   // Update an existing item with a given ID
   public updateItem(item: Item): Promise<any> {
     let sql = 'UPDATE items SET text = \"' + item.text + '\" WHERE id = \"' + item.id + '\"';
+    return this.query(sql);
+  }
+
+  // Update an existing list with a given ID
+  public updateList(list: List): Promise<any> {
+    let sql = 'UPDATE lists SET list_title = \"' + list.list_title + '\" WHERE id = \"' + list.id + '\"';
     return this.query(sql);
   }
 }

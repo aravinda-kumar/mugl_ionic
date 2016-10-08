@@ -14,12 +14,15 @@ export class ListsPage {
     this.onPageDidEnter();
   }
 
-  // Load our lists once the page appears
-  public onPageDidEnter(): void {
-    this.loadLists();
+  /* -----------------------------------------------------------------------------
+                                  List Interaction
+  -------------------------------------------------------------------------------- */
+  
+  public listSelected(list: List): void {
+    this.updateListPrompt(list);
   }
 
-  // Initialise the lists by loading data from our DB
+  // Initialize the lists by loading data from our DB
   private loadLists(): void {
     this.lists = [];
     this.sql.getLists().then(
@@ -32,6 +35,77 @@ export class ListsPage {
         }
       }
     });
+  }
+
+ // Remove all items from the DB and our current array
+  public removeAllLists(): void {
+    this.sql.removeAllLists();
+    this.lists = [];
+  }
+
+  // Remove the list from the DB and our current array
+  public removeList(list: List): void {
+    this.sql.removeList(list);
+    let index = this.lists.indexOf(list);
+
+    if (index > -1) {
+      this.lists.splice(index, 1);
+    }
+  }
+
+  /* -----------------------------------------------------------------------------
+                                     Navigation
+  -------------------------------------------------------------------------------- */
+
+  // Load our lists once the page appears
+  public onPageDidEnter(): void {
+    this.loadLists();
+  }
+
+  /* -----------------------------------------------------------------------------
+                                     UI Prompts
+  -------------------------------------------------------------------------------- */  
+
+  public deleteAllPrompt(): void {
+    let prompt = this.alerCtrl.create({
+      title: 'Delete all lists',
+      message: "Really delete all lists?",
+      inputs: [],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {}
+        },
+        {
+          text: 'OK',
+          handler: data => {            
+            this.removeAllLists();                
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  public deletePrompt(list: List): void {
+    let prompt = this.alerCtrl.create({
+      title: 'Delete list',
+      message: "Really delete this list?",
+      inputs: [],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {}
+        },
+        {
+          text: 'OK',
+          handler: data => {            
+            this.removeList(list);                
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   public newListPrompt(): void {
@@ -67,6 +141,36 @@ export class ListsPage {
                   });
             }
             this.loadLists();
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  public updateListPrompt(list: List): void {
+    let prompt = this.alerCtrl.create({
+      title: 'Edit List',
+      message: "Edit list title",
+      inputs: [
+        {
+          name: 'text',          
+          value: list.list_title
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {            
+            list.list_title = data.text;
+            
+            this.sql.updateList(list);                
+            this.loadLists();                
           }
         }
       ]
