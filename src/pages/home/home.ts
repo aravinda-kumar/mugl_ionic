@@ -16,7 +16,7 @@ export class HomePage {
     }
 
         // Initialise the items by loading data from our DB
-    private loadItems() {
+    private loadItems(): void {
         this.items = [];
         this.sql.getItems().then(
         data => {
@@ -31,7 +31,7 @@ export class HomePage {
     }
 
   // Looad sorted items from our DB
-  public loadSortedItems() {
+  public loadSortedItems(): void {
     this.items = [];
     this.sql.getSortedItems().then(
       data => {
@@ -45,12 +45,12 @@ export class HomePage {
       });
   }
 
-  public itemSelected(item: Item) {
+  public itemSelected(item: Item): void {
     this.updatePrompt(item);
   }
 
   // Remove the item from the DB and our current array
-  public removeItem(item: Item) {
+  public removeItem(item: Item): void {
     this.sql.removeItem(item);
     let index = this.items.indexOf(item);
 
@@ -60,27 +60,26 @@ export class HomePage {
   }
 
   // Remove all items from the DB and our current array
-  public removeAllItems() {
+  public removeAllItems(): void {
     this.sql.removeAllItems();
     this.items = [];
   }
 
   // Load our items once the page appears
-  private onPageDidEnter() {
+  private onPageDidEnter(): void {
     this.loadItems();
   }  
 
    // Push the about page
-  public about() {
+  public about(): void {
     this.navCtrl.push(AboutPage);
   }
 
-  checkItem(item: Item) {
-    this.sql.toggleCheckedItem(item);                
-    // this.loadItems();         
+  checkItem(item: Item): void {
+    this.sql.toggleCheckedItem(item);                    
   }
 
-  doPrompt() {
+  doPrompt(): void {
     let prompt = this.alerCtrl.create({
       title: 'New Item',
       message: "Enter an item for the list",
@@ -120,7 +119,7 @@ export class HomePage {
     prompt.present();
   }
 
-  updatePrompt(item: Item) {
+  updatePrompt(item: Item): void {
     let prompt = this.alerCtrl.create({
       title: 'Edit Item',
       message: "Edit list item",
@@ -150,7 +149,7 @@ export class HomePage {
     prompt.present();
   }
 
-  deletePrompt() {
+  deletePrompt(): void {
     let prompt = this.alerCtrl.create({
       title: 'Delete all items',
       message: "Really delete all items?",
@@ -171,7 +170,7 @@ export class HomePage {
     prompt.present();
   }
    
-  getStyle(item: Item) {
+  getStyle(item: Item): string {
     if(item.checked === 0){
       return "red";
     } else {
