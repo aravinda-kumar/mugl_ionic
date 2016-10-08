@@ -25,6 +25,64 @@ $ npm install
 $ ionic run android # or ionic emulate ios
 ```
 
+## Table Structure
+
+<table>
+  <tr>
+    <th colspan="4">Items</th>    
+  </tr>
+
+  <tr>
+    <th>id</th>
+    <th>list_id</th>
+    <th>text</th>
+    <th>checked</th>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>1</td>
+    <td>Apples</td>
+    <td>0</td>
+  </tr>
+
+  <tr>
+    <td>2</td>
+    <td>1</td>
+    <td>Bananas</td>
+    <td>1</td>
+  </tr>
+
+  <tr>
+    <td>3</td>
+    <td>2</td>
+    <td>Commit code</td>
+    <td>1</td>
+  </tr>
+</table>
+
+<table>
+<tr>
+  <th colspan="2">Lists</th>    
+</tr>
+
+<tr>
+  <th>id</th>
+  <th>list_title</th>  
+</tr>
+
+<tr>
+  <td>1</td>
+  <td>Groceries</td>  
+</tr>
+
+<tr>
+  <td>2</td>
+  <td>Programming</td>
+</tr>
+
+</table>
+
 ## Changelog
 
 v1.0.0 16-09-15: Converted project to Ionic. Plan to slowly regain previous native features and possibly port to iOS. Switching versioning to semver.org. Starting with fresh Git repo.

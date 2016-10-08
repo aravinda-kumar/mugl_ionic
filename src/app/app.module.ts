@@ -3,13 +3,15 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
-import {Sql} from "../providers/sql";
+import { ListsPage } from '../pages/lists/lists';
+import { Sql } from "../providers/sql";
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
-    HomePage
+    HomePage,
+    ListsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -18,7 +20,8 @@ import {Sql} from "../providers/sql";
   entryComponents: [
     MyApp,
     AboutPage,
-    HomePage
+    HomePage,
+    ListsPage
   ],
   providers: [Sql]
 })
