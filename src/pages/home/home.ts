@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import {AboutPage} from '../about/about';
-import {Sql, Item} from "../../providers/sql";
+import { AboutPage } from '../about/about';
+import { Sql, Item } from "../../providers/sql";
 
 @Component({
   selector: 'page-home',
@@ -13,6 +13,26 @@ export class HomePage {
  
   public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
     this.onPageDidEnter();
+  }
+
+  /* -----------------------------------------------------------------------------
+                               Item Interaction
+  -------------------------------------------------------------------------------- */
+
+  public checkItem(item: Item): void {
+    this.sql.toggleCheckedItem(item);                    
+  }
+
+  public getStyle(item: Item): string {
+    if(item.checked === 0){
+      return "red";
+    } else {
+      return "green";
+    }
+  }
+
+  public itemSelected(item: Item): void {
+    this.updatePrompt(item);
   }
 
   // Initialise the items by loading data from our DB
@@ -44,9 +64,11 @@ export class HomePage {
         }
       });
   }
-
-  public itemSelected(item: Item): void {
-    this.updatePrompt(item);
+  
+  // Remove all items from the DB and our current array
+  public removeAllItems(): void {
+    this.sql.removeAllItems();
+    this.items = [];
   }
 
   // Remove the item from the DB and our current array
@@ -59,27 +81,46 @@ export class HomePage {
     }
   }
 
-  // Remove all items from the DB and our current array
-  public removeAllItems(): void {
-    this.sql.removeAllItems();
-    this.items = [];
-  }
+  /* -----------------------------------------------------------------------------
+                                     Navigation
+  -------------------------------------------------------------------------------- */
+  
+  // Push the about page
+  public aboutPage(): void {
+    this.navCtrl.push(AboutPage);
+  }     
 
   // Load our items once the page appears
-  private onPageDidEnter(): void {
+  public onPageDidEnter(): void {
     this.loadItems();
-  }  
-
-   // Push the about page
-  public about(): void {
-    this.navCtrl.push(AboutPage);
   }
 
-  checkItem(item: Item): void {
-    this.sql.toggleCheckedItem(item);                    
+  /* -----------------------------------------------------------------------------
+                                     UI Prompts
+  -------------------------------------------------------------------------------- */
+
+  public deletePrompt(): void {
+    let prompt = this.alerCtrl.create({
+      title: 'Delete all items',
+      message: "Really delete all items?",
+      inputs: [],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {}
+        },
+        {
+          text: 'OK',
+          handler: data => {            
+            this.removeAllItems();                
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
-  doPrompt(): void {
+  public newItemPrompt(): void {
     let prompt = this.alerCtrl.create({
       title: 'New Item',
       message: "Enter an item for the list",
@@ -119,7 +160,7 @@ export class HomePage {
     prompt.present();
   }
 
-  updatePrompt(item: Item): void {
+  public updatePrompt(item: Item): void {
     let prompt = this.alerCtrl.create({
       title: 'Edit Item',
       message: "Edit list item",
@@ -147,34 +188,5 @@ export class HomePage {
       ]
     });
     prompt.present();
-  }
-
-  deletePrompt(): void {
-    let prompt = this.alerCtrl.create({
-      title: 'Delete all items',
-      message: "Really delete all items?",
-      inputs: [],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {}
-        },
-        {
-          text: 'OK',
-          handler: data => {            
-            this.removeAllItems();                
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
-   
-  getStyle(item: Item): string {
-    if(item.checked === 0){
-      return "red";
-    } else {
-      return "green";
-    }
   }
 }

@@ -71,24 +71,30 @@ export class Sql {
 
   // Get all items from our DB
   public getItems(): Promise<any> {
-    return this.query('SELECT * FROM items');
+    return this.query('SELECT * FROM items');    
   }
 
    // Get all items from our DB, sorted
   public getSortedItems(): Promise<any> {
     return this.query('SELECT * FROM items ORDER BY text');
   }
+    
+  // Remove all items
+  public removeAllItems(): Promise<any> {
+    let sql = 'DELETE FROM items';
+    return this.query(sql);
+  }
+
+  // Remove an item with a given ID
+  public removeItem(item: Item): Promise<any> {
+    let sql = 'DELETE FROM items WHERE id = \"' + item.id + '\"';
+    return this.query(sql);
+  }
 
   // Save a new item to the DB
   public saveItem(item: Item): Promise<any> {
     let sql = 'INSERT INTO items (text, checked) VALUES (?, ?)';
     return this.query(sql, [item.text, 0]);
-  }
-
-  // Update an existing item with a given ID
-  public updateItem(item: Item): Promise<any> {
-    let sql = 'UPDATE items SET text = \"' + item.text + '\" WHERE id = \"' + item.id + '\"';
-    return this.query(sql);
   }
 
   public toggleCheckedItem(item: Item): Promise<any> {
@@ -102,15 +108,9 @@ export class Sql {
     return this.query(sql);
   }
 
-  // Remove an item with a given ID
-  public removeItem(item: Item): Promise<any> {
-    let sql = 'DELETE FROM items WHERE id = \"' + item.id + '\"';
-    return this.query(sql);
-  }
-  
-  // Remove all items
-  public removeAllItems(): Promise<any> {
-    let sql = 'DELETE FROM items';
+  // Update an existing item with a given ID
+  public updateItem(item: Item): Promise<any> {
+    let sql = 'UPDATE items SET text = \"' + item.text + '\" WHERE id = \"' + item.id + '\"';
     return this.query(sql);
   }
 }
