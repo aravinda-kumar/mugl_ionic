@@ -37,7 +37,7 @@ export class ListsPage {
     });
   }
 
- // Remove all items from the DB and our current array
+ // Remove all lists from the DB and our current array
   public removeAllLists(): void {
     this.sql.removeAllLists();
     this.lists = [];

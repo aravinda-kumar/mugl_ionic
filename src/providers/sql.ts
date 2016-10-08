@@ -108,6 +108,7 @@ export class Sql {
 
   // Remove all items
   public removeAllLists(): Promise<any> {
+    // TODO make items in items table delete too
     let sql = 'DELETE FROM lists';
     return this.query(sql);
   }
@@ -120,6 +121,7 @@ export class Sql {
 
   // Remove a list with a given ID
   public removeList(list: List): Promise<any> {
+    // TODO make items in items table delete too
     let sql = 'DELETE FROM lists WHERE id = \"' + list.id + '\"';
     return this.query(sql);
   }
