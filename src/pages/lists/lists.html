@@ -2,10 +2,27 @@
 
   <ion-navbar color="primary">
     <ion-title>Lists</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="newListPrompt()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let list of lists">
+      <button ion-item>
+          <h1>{{list.list_title}} {{list.id}}</h1>
+      </button>
 
+      <!--<ion-item-options>
+        <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
+      </ion-item-options>-->
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

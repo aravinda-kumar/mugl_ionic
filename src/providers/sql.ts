@@ -14,6 +14,15 @@ export class Item {
   }
 }
 
+export class List {
+  id: number;
+  list_title: string;
+  constructor(id: number, list_title: string) {
+    this.id = id;
+    this.list_title = list_title;
+  }
+}
+
 @Injectable()
 export class Sql {
     private _db: any;
@@ -40,6 +49,13 @@ export class Sql {
                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
                        text TEXT,
                        checked INTEGER
+                       )`).catch(err => {
+            console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
+        });
+
+        this.query(`CREATE TABLE IF NOT EXISTS lists (
+                       id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                       list_title TEXT                       
                        )`).catch(err => {
             console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
         });
@@ -74,6 +90,11 @@ export class Sql {
     return this.query('SELECT * FROM items');    
   }
 
+   // Get all lists from our DB
+  public getLists(): Promise<any> {
+    return this.query('SELECT * FROM lists');    
+  }
+
    // Get all items from our DB, sorted
   public getSortedItems(): Promise<any> {
     return this.query('SELECT * FROM items ORDER BY text');
@@ -95,6 +116,12 @@ export class Sql {
   public saveItem(item: Item): Promise<any> {
     let sql = 'INSERT INTO items (text, checked) VALUES (?, ?)';
     return this.query(sql, [item.text, 0]);
+  }
+
+  // Save a new list to the DB
+  public saveList(list: List): Promise<any> {
+    let sql = 'INSERT INTO lists (list_title) VALUES (?)';
+    return this.query(sql, [list.list_title]);
   }
 
   public toggleCheckedItem(item: Item): Promise<any> {
