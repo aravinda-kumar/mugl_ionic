@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
 import { Sql, List } from "../../providers/sql";
 
@@ -64,6 +65,11 @@ export class ListsPage {
   /* -----------------------------------------------------------------------------
                                      Navigation
   -------------------------------------------------------------------------------- */
+
+  // Push the about page
+  public aboutPage(): void {
+    this.navCtrl.push(AboutPage);
+  }    
 
   // Load our lists once the page appears
   public onPageDidEnter(): void {

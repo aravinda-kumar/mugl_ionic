@@ -1,13 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{thisListTitle}}</ion-title>
-
-    <ion-buttons start>
-      <button ion-button (click)="listsPage()">
-        <ion-icon name="list"></ion-icon>
-      </button>
-    </ion-buttons>
-
     <ion-buttons end>
       <button ion-button (click)="newItemPrompt()">
         <ion-icon name="add"></ion-icon>
@@ -17,9 +10,6 @@
       </button>
       <button ion-button (click)="deletePrompt()">
         <ion-icon name="trash"></ion-icon>
-      </button>
-      <button ion-button (click)="aboutPage()">
-        <ion-icon name="information"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

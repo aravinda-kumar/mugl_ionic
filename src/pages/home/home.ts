@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { AboutPage } from '../about/about';
-import { ListsPage } from '../lists/lists';
 import { Sql, Item } from "../../providers/sql";
 
 @Component({
@@ -86,17 +84,7 @@ export class HomePage {
   /* -----------------------------------------------------------------------------
                                      Navigation
   -------------------------------------------------------------------------------- */
-  
-  // Push the about page
-  public aboutPage(): void {
-    this.navCtrl.push(AboutPage);
-  }     
-
-  // Push the lists page
-  public listsPage(): void {
-    this.navCtrl.push(ListsPage);
-  }   
-
+   
   // Load our items once the page appears
   public onPageDidEnter(): void {
     this.thisListTitle = this.sql.listName;
