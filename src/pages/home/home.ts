@@ -10,7 +10,8 @@ import { Sql, Item } from "../../providers/sql";
 })
 export class HomePage {
 
-  items: Item[]; 
+  items: Item[];
+  public thisListTitle: string;
  
   public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
     this.onPageDidEnter();
@@ -45,7 +46,7 @@ export class HomePage {
       if (data.res.rows.length > 0) {
         for (var i = 0; i < data.res.rows.length; i++) {
           let item = data.res.rows.item(i);
-          this.items.push(new Item(item.text, item.id, item.checked));
+          this.items.push(new Item(item.text, item.id, item.checked, item.list_id));
         }
       }
     });
@@ -60,7 +61,7 @@ export class HomePage {
         if (data.res.rows.length > 0) {
           for (var i = 0; i < data.res.rows.length; i++) {
             let item = data.res.rows.item(i);
-            this.items.push(new Item(item.text, item.id, item.checked));
+            this.items.push(new Item(item.text, item.id, item.checked, item.list_id));
           }
         }
       });
@@ -98,6 +99,7 @@ export class HomePage {
 
   // Load our items once the page appears
   public onPageDidEnter(): void {
+    this.thisListTitle = this.sql.listName;
     this.loadItems();
   }
 
@@ -146,7 +148,8 @@ export class HomePage {
           text: 'Save',
           handler: data => {
 
-            let item = new Item('', null, 0);
+            let item = new Item('', null, 0, this.sql.whichList);
+            console.log(item.list_id);
 
             // use regex to check that at least one non-whitespace char is present
             if (/\S/.test(data.text)) {              

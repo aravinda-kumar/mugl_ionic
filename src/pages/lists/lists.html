@@ -18,8 +18,8 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let list of lists">
-      <button ion-item>
-          <h1>{{list.list_title}} {{list.id}}</h1>
+      <button ion-item (click)="loadList(list)">
+          <h1>{{list.list_title}}</h1>
       </button>
 
       <ion-item-options>

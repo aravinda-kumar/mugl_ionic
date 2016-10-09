@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 import { Sql, List } from "../../providers/sql";
 
 @Component({
@@ -8,7 +9,7 @@ import { Sql, List } from "../../providers/sql";
 })
 export class ListsPage {
 
-  lists: List[]; 
+  lists: List[];  
 
   constructor(public navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
     this.onPageDidEnter();
@@ -20,6 +21,13 @@ export class ListsPage {
   
   public listSelected(list: List): void {
     this.updateListPrompt(list);
+  }
+
+  public loadList(list: List): void {
+    this.sql.whichList = list.id;
+    this.sql.listName = list.list_title;
+    console.log(this.sql.whichList + "");
+    this.homePage();
   }
 
   // Initialize the lists by loading data from our DB
@@ -61,6 +69,11 @@ export class ListsPage {
   public onPageDidEnter(): void {
     this.loadLists();
   }
+
+   // Push the home page
+  public homePage(): void {
+    this.navCtrl.push(HomePage);
+  }   
 
   /* -----------------------------------------------------------------------------
                                      UI Prompts

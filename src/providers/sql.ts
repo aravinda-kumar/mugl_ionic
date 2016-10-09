@@ -7,10 +7,12 @@ export class Item {
   text: string;
   id: number;
   checked: number;
-  constructor(text: string, id: number, checked: number) {
+  list_id: number;
+  constructor(text: string, id: number, checked: number, list_id: number) {
     this.text = text;
     this.id = id;
     this.checked = checked;
+    this.list_id = list_id;
   }
 }
 
@@ -26,6 +28,8 @@ export class List {
 @Injectable()
 export class Sql {
     private _db: any;
+    public whichList: number;
+    public listName: string;
 
     constructor() {
         if (win.sqlitePlugin) {
@@ -46,9 +50,10 @@ export class Sql {
     // Initialize the DB with our required tables
     _tryInit() {
         this.query(`CREATE TABLE IF NOT EXISTS items (
-                       id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                       id INTEGER PRIMARY KEY AUTOINCREMENT,                        
                        text TEXT,
-                       checked INTEGER
+                       checked INTEGER,
+                       list_id INTEGER
                        )`).catch(err => {
             console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
         });
@@ -87,7 +92,7 @@ export class Sql {
 
   // Get all items from our DB
   public getItems(): Promise<any> {
-    return this.query('SELECT * FROM items');    
+    return this.query('SELECT * FROM items where list_id = \"' + this.whichList + '\"');    
   }
 
    // Get all lists from our DB
@@ -110,6 +115,9 @@ export class Sql {
   public removeAllLists(): Promise<any> {
     // TODO make items in items table delete too
     let sql = 'DELETE FROM lists';
+    this.query(sql);
+
+    sql = 'DELETE FROM items';
     return this.query(sql);
   }
 
@@ -123,13 +131,17 @@ export class Sql {
   public removeList(list: List): Promise<any> {
     // TODO make items in items table delete too
     let sql = 'DELETE FROM lists WHERE id = \"' + list.id + '\"';
+    this.query(sql);
+
+    sql = 'DELETE FROM items WHERE list_id = \"' + list.id + '\"';
     return this.query(sql);
   }
 
   // Save a new item to the DB
   public saveItem(item: Item): Promise<any> {
-    let sql = 'INSERT INTO items (text, checked) VALUES (?, ?)';
-    return this.query(sql, [item.text, 0]);
+    let sql = 'INSERT INTO items (text, checked, list_id) VALUES (?, ?, ?)';
+    console.log(sql);
+    return this.query(sql, [item.text, 0, item.list_id]);
   }
 
   // Save a new list to the DB
