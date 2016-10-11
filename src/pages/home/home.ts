@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   public getStyle(item: Item): string {
-    if(item.checked === 0){
+    if(item.checked == false){
       return "red";
     } else {
       return "green";
@@ -136,7 +136,7 @@ export class HomePage {
           text: 'Save',
           handler: data => {
 
-            let item = new Item('', null, 0, this.sql.whichList);
+            let item = new Item('', null, false, this.sql.whichList);
             console.log(item.list_id);
 
             // use regex to check that at least one non-whitespace char is present

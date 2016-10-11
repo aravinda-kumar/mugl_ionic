@@ -6,9 +6,9 @@ const win: any = window;
 export class Item {
   text: string;
   id: number;
-  checked: number;
+  checked: boolean;
   list_id: number;
-  constructor(text: string, id: number, checked: number, list_id: number) {
+  constructor(text: string, id: number, checked: boolean, list_id: number) {
     this.text = text;
     this.id = id;
     this.checked = checked;
@@ -151,13 +151,18 @@ export class Sql {
   }
 
   public toggleCheckedItem(item: Item): Promise<any> {
-    if (item.checked === 0) {
-      item.checked = 1;
+    let oneOrZero = 0;
+    if (item.checked == false) {
+      item.checked = true;
+      oneOrZero = 1;
     } else {
-      item.checked = 0;
+      item.checked = false;
+      oneOrZero = 0;
     }
 
-    let sql = 'UPDATE items SET checked = \"' + item.checked + '\" WHERE id = \"' + item.id + '\"';
+
+
+    let sql = 'UPDATE items SET checked = \"' + oneOrZero + '\" WHERE id = \"' + item.id + '\"';
     return this.query(sql);
   }
 

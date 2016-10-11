@@ -18,9 +18,11 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let item of items">
-      <button ion-item (click)="checkItem(item)">
-          <h1 [style.color]="getStyle(item)">{{item.text}}</h1>
-      </button>
+      <ion-item>
+          <!--<h1 [style.color]="getStyle(item)">{{item.text}}</h1>-->
+          <ion-label>{{item.text}}</ion-label>
+          <ion-checkbox (click)="checkItem(item)" [(ngModel)]="item.checked" [checked]="item.checked"></ion-checkbox>
+      </ion-item>
 
       <ion-item-options>
         <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
