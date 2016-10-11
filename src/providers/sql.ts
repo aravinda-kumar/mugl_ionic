@@ -102,7 +102,7 @@ export class Sql {
 
    // Get all items from our DB, sorted
   public getSortedItems(): Promise<any> {
-    return this.query('SELECT * FROM items ORDER BY text');
+    return this.query('SELECT * FROM items WHERE list_id = \"' + this.whichList + '\" ORDER BY text');
   }
     
   // Remove all items
