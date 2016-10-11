@@ -1,4 +1,14 @@
 page-home {
+    // rules for spacing nav bar icons
+    .bar-button-md {
+        margin-left: 0.8rem !important;
+        margin-right: 0.8rem !important;
+    }
+    .bar-button-ios {
+        padding: 0 5px !important;
+    }
+
+    // android bug fix
     .item-md.activated {
         background-color: #ffffff
     }
