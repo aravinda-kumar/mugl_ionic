@@ -98,7 +98,7 @@ export class HomePage {
   public deletePrompt(): void {
     let prompt = this.alerCtrl.create({
       title: 'Delete all items',
-      message: "Really delete all items?",
+      message: "Really delete all items in this list?",
       inputs: [],
       buttons: [
         {

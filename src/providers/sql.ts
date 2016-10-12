@@ -107,7 +107,7 @@ export class Sql {
     
   // Remove all items
   public removeAllItems(): Promise<any> {
-    let sql = 'DELETE FROM items';
+    let sql = 'DELETE FROM items WHERE list_id = \"' + this.whichList + '\"';
     return this.query(sql);
   }
 
