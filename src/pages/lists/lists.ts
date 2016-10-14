@@ -10,7 +10,7 @@ import { Sql, List } from "../../providers/sql";
 })
 export class ListsPage {
 
-  lists: List[];  
+  lists: List[];
 
   constructor(public navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
     this.onPageDidEnter();
@@ -19,7 +19,7 @@ export class ListsPage {
   /* -----------------------------------------------------------------------------
                                   List Interaction
   -------------------------------------------------------------------------------- */
-  
+
   public listSelected(list: List): void {
     this.updateListPrompt(list);
   }
@@ -35,18 +35,18 @@ export class ListsPage {
   private loadLists(): void {
     this.lists = [];
     this.sql.getLists().then(
-    data => {
-      this.lists = [];
-      if (data.res.rows.length > 0) {
-        for (var i = 0; i < data.res.rows.length; i++) {
-          let list = data.res.rows.item(i);
-          this.lists.push(new List(list.id, list.list_title));
+      data => {
+        this.lists = [];
+        if (data.res.rows.length > 0) {
+          for (var i = 0; i < data.res.rows.length; i++) {
+            let list = data.res.rows.item(i);
+            this.lists.push(new List(list.id, list.list_title));
+          }
         }
-      }
-    });
+      });
   }
 
- // Remove all lists from the DB and our current array
+  // Remove all lists from the DB and our current array
   public removeAllLists(): void {
     this.sql.removeAllLists();
     this.lists = [];
@@ -69,21 +69,21 @@ export class ListsPage {
   // Push the about page
   public aboutPage(): void {
     this.navCtrl.push(AboutPage);
-  }    
+  }
 
   // Load our lists once the page appears
   public onPageDidEnter(): void {
     this.loadLists();
   }
 
-   // Push the home page
+  // Push the home page
   public homePage(): void {
     this.navCtrl.push(HomePage);
-  }   
+  }
 
   /* -----------------------------------------------------------------------------
                                      UI Prompts
-  -------------------------------------------------------------------------------- */  
+  -------------------------------------------------------------------------------- */
 
   public deleteAllPrompt(): void {
     let prompt = this.alerCtrl.create({
@@ -93,12 +93,12 @@ export class ListsPage {
       buttons: [
         {
           text: 'Cancel',
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: 'OK',
-          handler: data => {            
-            this.removeAllLists();                
+          handler: data => {
+            this.removeAllLists();
           }
         }
       ]
@@ -114,12 +114,12 @@ export class ListsPage {
       buttons: [
         {
           text: 'Cancel',
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: 'OK',
-          handler: data => {            
-            this.removeList(list);                
+          handler: data => {
+            this.removeList(list);
           }
         }
       ]
@@ -150,14 +150,14 @@ export class ListsPage {
             let list = new List(null, '');
 
             // use regex to check that at least one non-whitespace char is present
-            if (/\S/.test(data.text)) {              
+            if (/\S/.test(data.text)) {
               list.list_title = data.text;
 
               this.sql.saveList(list).then((data) => {
-                    // Set the automatically created id to our list
-                    // list.id = data.res["insertId"];
-                    list.id = data.res["id"];                    
-                  });
+                // Set the automatically created id to our list
+                // list.id = data.res["insertId"];
+                list.id = data.res["id"];
+              });
             }
             this.loadLists();
           }
@@ -173,7 +173,7 @@ export class ListsPage {
       message: "Edit list title",
       inputs: [
         {
-          name: 'text',          
+          name: 'text',
           value: list.list_title
         },
       ],
@@ -185,11 +185,11 @@ export class ListsPage {
         },
         {
           text: 'Save',
-          handler: data => {            
+          handler: data => {
             list.list_title = data.text;
-            
-            this.sql.updateList(list);                
-            this.loadLists();                
+
+            this.sql.updateList(list);
+            this.loadLists();
           }
         }
       ]

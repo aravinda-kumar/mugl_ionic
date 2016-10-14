@@ -7,7 +7,6 @@ page-home {
     .bar-button-ios {
         padding: 0 5px !important;
     }
-
     // rules for extending bottom border completely across and eliminating double lines
     .item-block {
         border-bottom: 1px solid #dedede;
@@ -19,12 +18,11 @@ page-home {
     .list-ios .item-block .item-inner {
         border-bottom: 0px solid #c8c7cc;
     }
-
     // android bug fix
     .item-md.activated {
         background-color: #ffffff
     }
-
+    // zebra striping
     ion-list[zebra] {
         ion-item-sliding:nth-child(even) ion-item {
             background-color: $item-even;

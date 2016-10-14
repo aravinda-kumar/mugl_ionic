@@ -1,33 +1,33 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>{{thisListTitle}}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="newItemPrompt()">
+	<ion-navbar color="primary">
+		<ion-title>{{thisListTitle}}</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="newItemPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
-      <button ion-button icon-only (click)="loadSortedItems()">
+			<button ion-button icon-only (click)="loadSortedItems()">
         <ion-icon name="funnel"></ion-icon>
       </button>
-      <button ion-button icon-only (click)="deletePrompt()">
-        <ion-icon name="trash"></ion-icon>
+			<button ion-button icon-only (click)="deletePrompt()">
+        <ion-icon name="trash"></ion-icon> 
       </button>
-    </ion-buttons>
-  </ion-navbar>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list zebra>
-    <ion-item-sliding *ngFor="let item of items">
-      <ion-item>
-          <!--<h1 [style.color]="getStyle(item)">{{item.text}}</h1>-->
-          <ion-label>{{item.text}}</ion-label>
-          <ion-checkbox (click)="checkItem(item)" [(ngModel)]="item.checked" [checked]="item.checked"></ion-checkbox>
-      </ion-item>
+	<ion-list zebra>
+		<ion-item-sliding *ngFor="let item of items">
+			<ion-item>
+				<!--<h1 [style.color]="getStyle(item)">{{item.text}}</h1>-->
+				<ion-label>{{item.text}}</ion-label>
+				<ion-checkbox (click)="checkItem(item)" [(ngModel)]="item.checked" [checked]="item.checked"></ion-checkbox>
+			</ion-item>
 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
-        <button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+			<ion-item-options>
+				<button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
+				<button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
 </ion-content>

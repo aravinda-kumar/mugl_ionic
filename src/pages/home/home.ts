@@ -10,21 +10,21 @@ export class HomePage {
 
   items: Item[];
   public thisListTitle: string;
- 
+
   public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
     this.onPageDidEnter();
   }
 
-  /* -----------------------------------------------------------------------------
+  /* ----------------------------------------------------------------------------- 
                                Item Interaction
   -------------------------------------------------------------------------------- */
 
   public checkItem(item: Item): void {
-    this.sql.toggleCheckedItem(item);                    
+    this.sql.toggleCheckedItem(item);
   }
 
   public getStyle(item: Item): string {
-    if(item.checked == false){
+    if (item.checked == false) {
       return "red";
     } else {
       return "green";
@@ -39,15 +39,15 @@ export class HomePage {
   private loadItems(): void {
     this.items = [];
     this.sql.getItems().then(
-    data => {
-      this.items = [];
-      if (data.res.rows.length > 0) {
-        for (var i = 0; i < data.res.rows.length; i++) {
-          let item = data.res.rows.item(i);
-          this.items.push(new Item(item.text, item.id, item.checked, item.list_id));
+      data => {
+        this.items = [];
+        if (data.res.rows.length > 0) {
+          for (var i = 0; i < data.res.rows.length; i++) {
+            let item = data.res.rows.item(i);
+            this.items.push(new Item(item.text, item.id, item.checked, item.list_id));
+          }
         }
-      }
-    });
+      });
   }
 
   // Load sorted items from our DB
@@ -64,7 +64,7 @@ export class HomePage {
         }
       });
   }
-  
+
   // Remove all items from the DB and our current array
   public removeAllItems(): void {
     this.sql.removeAllItems();
@@ -84,7 +84,7 @@ export class HomePage {
   /* -----------------------------------------------------------------------------
                                      Navigation
   -------------------------------------------------------------------------------- */
-   
+
   // Load our items once the page appears
   public onPageDidEnter(): void {
     this.thisListTitle = this.sql.listName;
@@ -103,12 +103,12 @@ export class HomePage {
       buttons: [
         {
           text: 'Cancel',
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: 'OK',
-          handler: data => {            
-            this.removeAllItems();                
+          handler: data => {
+            this.removeAllItems();
           }
         }
       ]
@@ -140,14 +140,14 @@ export class HomePage {
             console.log(item.list_id);
 
             // use regex to check that at least one non-whitespace char is present
-            if (/\S/.test(data.text)) {              
+            if (/\S/.test(data.text)) {
               item.text = data.text;
 
               this.sql.saveItem(item).then((data) => {
-                    // Set the automatically created id to our item
-                    // item.id = data.res["insertId"];
-                    item.id = data.res["id"];                    
-                  });
+                // Set the automatically created id to our item
+                // item.id = data.res["insertId"];
+                item.id = data.res["id"];
+              });
             }
             this.loadItems();
           }
@@ -163,7 +163,7 @@ export class HomePage {
       message: "Edit list item",
       inputs: [
         {
-          name: 'text',          
+          name: 'text',
           value: item.text
         },
       ],
@@ -175,11 +175,11 @@ export class HomePage {
         },
         {
           text: 'Save',
-          handler: data => {            
+          handler: data => {
             item.text = data.text;
-            
-            this.sql.updateItem(item);                
-            this.loadItems();                
+
+            this.sql.updateItem(item);
+            this.loadItems();
           }
         }
       ]
