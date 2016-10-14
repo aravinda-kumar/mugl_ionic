@@ -24,4 +24,10 @@ page-home {
     .item-md.activated {
         background-color: #ffffff
     }
+
+    ion-list[zebra] {
+        ion-item-sliding:nth-child(even) ion-item {
+            background-color: $item-even;
+        }
+    }
 }
