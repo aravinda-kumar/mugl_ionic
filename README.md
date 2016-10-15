@@ -87,6 +87,10 @@ $ ionic run android # or ionic emulate ios
 
 v1.0.0 16-09-15: Converted project to Ionic. Plan to slowly regain previous native features and possibly port to iOS. Switching versioning to semver.org. Starting with fresh Git repo.
 
+## Contributing to MUGL
+
+Pull requests are welcome and encouraged! I will test any pull requests made and merge them in if they are non-trivial (ie, more than a simple whitespace correction).
+
 ## License
 
-100% F/LOSS software, MIT licensed (see MIT_License.txt). Copy/modify at will!
+100% F/LOSS software, MIT licensed (see LICENSE). Copy/modify at will!
