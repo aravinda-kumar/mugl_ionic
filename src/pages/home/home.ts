@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { Sql, Item } from "../../providers/sql";
 
 @Component({
@@ -11,7 +11,7 @@ export class HomePage {
   items: Item[];
   public thisListTitle: string;
 
-  public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController) {
+  public constructor(private navCtrl: NavController, private sql: Sql, public alerCtrl: AlertController, public actionSheetCtrl: ActionSheetController) {
     this.onPageDidEnter();
   }
 
@@ -71,6 +71,12 @@ export class HomePage {
     this.items = [];
   }
 
+  // Remove all checked items from the DB and our current array
+  public removeCheckedItems(): void {
+    this.sql.removeCheckedItems();
+    this.loadItems();
+  }
+
   // Remove the item from the DB and our current array
   public removeItem(item: Item): void {
     this.sql.removeItem(item);
@@ -96,24 +102,29 @@ export class HomePage {
   -------------------------------------------------------------------------------- */
 
   public deletePrompt(): void {
-    let prompt = this.alerCtrl.create({
-      title: 'Delete all items',
-      message: "Really delete all items in this list?",
-      inputs: [],
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Delete Items',
       buttons: [
         {
-          text: 'Cancel',
-          handler: data => { }
-        },
-        {
-          text: 'OK',
+          text: 'Delete All',
+          role: 'destructive',
           handler: data => {
             this.removeAllItems();
+          }
+        }, {
+          text: 'Delete Checked',
+          handler: data => {
+            this.removeCheckedItems();
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
           }
         }
       ]
     });
-    prompt.present();
+    actionSheet.present();
   }
 
   public newItemPrompt(): void {

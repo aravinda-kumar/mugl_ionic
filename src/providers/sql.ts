@@ -122,6 +122,12 @@ export class Sql {
   }
 
   // Remove an item with a given ID
+  public removeCheckedItems(): Promise<any> {
+    let sql = 'DELETE FROM items WHERE list_id = \"' + this.whichList + '\" AND checked =  1';
+    return this.query(sql);
+  }
+
+  // Remove an item with a given ID
   public removeItem(item: Item): Promise<any> {
     let sql = 'DELETE FROM items WHERE id = \"' + item.id + '\"';
     return this.query(sql);
