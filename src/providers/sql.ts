@@ -27,84 +27,84 @@ export class List {
 
 @Injectable()
 export class Sql {
-    private _db: any;
-    public whichList: number;
-    public listName: string;
+  private _db: any;
+  public whichList: number;
+  public listName: string;
 
-    constructor() {
-        if (win.sqlitePlugin) {
-            this._db = win.sqlitePlugin.openDatabase({
-                name: DB_NAME,
-                location: 2,
-                createFromLocation: 0
-            });
+  constructor() {
+    if (win.sqlitePlugin) {
+      this._db = win.sqlitePlugin.openDatabase({
+        name: DB_NAME,
+        location: 2,
+        createFromLocation: 0
+      });
 
-        } else {
-            console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
+    } else {
+      console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
 
-            this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
-        }
-        this._tryInit();
+      this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
     }
+    this._tryInit();
+  }
 
-    // Initialize the DB with our required tables
-    _tryInit() {
-        this.query(`CREATE TABLE IF NOT EXISTS items (
+  // Initialize the DB with our required tables
+  _tryInit() {
+    this.query(`CREATE TABLE IF NOT EXISTS items (
                        id INTEGER PRIMARY KEY AUTOINCREMENT,                        
                        text TEXT,
                        checked INTEGER,
                        list_id INTEGER
                        )`).catch(err => {
-            console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
-        });
+        console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
+      });
 
-        this.query(`CREATE TABLE IF NOT EXISTS lists (
+    this.query(`CREATE TABLE IF NOT EXISTS lists (
                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
                        list_title TEXT                       
                        )`).catch(err => {
-            console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
-        });
-    }
+        console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
+      });
+  }
 
-    /**
-     * Perform an arbitrary SQL operation on the database. Use this method
-     * to have full control over the underlying database through SQL operations
-     * like SELECT, INSERT, and UPDATE.
-     *
-     * @param {string} query the query to run
-     * @param {array} params the additional params to use for query placeholders
-     * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
-     */
-    query(query: string, params: any[] = []): Promise<any> {
-        return new Promise((resolve, reject) => {
-            try {
-                this._db.transaction((tx: any) => {
-                        tx.executeSql(query, params,
-                            (tx: any, res: any) => resolve({ tx: tx, res: res }),
-                            (tx: any, err: any) => reject({ tx: tx, err: err }));
-                    },
-                    (err: any) => reject({ err: err }));
-            } catch (err) {
-                reject({ err: err });
-            }
-        });
-    }
+  /**
+   * Perform an arbitrary SQL operation on the database. Use this method
+   * to have full control over the underlying database through SQL operations
+   * like SELECT, INSERT, and UPDATE.
+   *
+   * @param {string} query the query to run
+   * @param {array} params the additional params to use for query placeholders
+   * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
+   */
+  query(query: string, params: any[] = []): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this._db.transaction((tx: any) => {
+          tx.executeSql(query, params,
+            (tx: any, res: any) => resolve({ tx: tx, res: res }),
+            (tx: any, err: any) => reject({ tx: tx, err: err }));
+        },
+          (err: any) => reject({ err: err }));
+      } catch (err) {
+        reject({ err: err });
+      }
+    });
+  }
 
   // Get all items from our DB
   public getItems(): Promise<any> {
-    return this.query('SELECT * FROM items where list_id = \"' + this.whichList + '\"');    
+    return this.query('SELECT * FROM items where list_id = \"' + this.whichList + '\"');
   }
 
-   // Get all lists from our DB
+  // Get all lists from our DB
   public getLists(): Promise<any> {
-    return this.query('SELECT * FROM lists');    
+    return this.query('SELECT * FROM lists');
   }
 
-   // Get all items from our DB, sorted
+  // Get all items from our DB, sorted
   public getSortedItems(): Promise<any> {
-    return this.query('SELECT * FROM items WHERE list_id = \"' + this.whichList + '\" ORDER BY text');
+    return this.query('SELECT * FROM items WHERE list_id = \"' + this.whichList + '\" ORDER BY text COLLATE NOCASE');
   }
-    
+
   // Remove all items
   public removeAllItems(): Promise<any> {
     let sql = 'DELETE FROM items WHERE list_id = \"' + this.whichList + '\"';
