@@ -5,12 +5,6 @@
 			<button ion-button icon-only (click)="newItemPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
-			<button ion-button icon-only (click)="loadSortedItems()">
-        <ion-icon name="funnel"></ion-icon>
-      </button>
-			<button ion-button icon-only (click)="deletePrompt()">
-        <ion-icon name="trash"></ion-icon> 
-      </button>
 		</ion-buttons>
 	</ion-navbar>
 </ion-header>
@@ -30,4 +24,13 @@
 			</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
+
+	<ion-fab right bottom>
+		<button ion-fab color="light"><ion-icon name="arrow-up"></ion-icon></button>
+		<ion-fab-list side="top">
+			<button ion-fab (click)="deletePrompt()"><ion-icon name="trash"></ion-icon></button>
+			<button ion-fab (click)="loadSortedItems()"><ion-icon name="funnel"></ion-icon></button>
+		</ion-fab-list>
+	</ion-fab>
+
 </ion-content>

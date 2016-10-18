@@ -7,12 +7,6 @@
 			<button ion-button icon-only (click)="newListPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
-			<button ion-button icon-only (click)="deleteAllPrompt()">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-			<button ion-button icon-only (click)="aboutPage()">
-        <ion-icon name="information"></ion-icon>
-      </button>
 		</ion-buttons>
 	</ion-navbar>
 
@@ -31,4 +25,13 @@
 			</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
+
+	<ion-fab right bottom>
+		<button ion-fab color="light"><ion-icon name="arrow-up"></ion-icon></button>
+		<ion-fab-list side="top">
+			<button ion-fab (click)="deleteAllPrompt()"><ion-icon name="trash"></ion-icon></button>
+			<button ion-fab (click)="aboutPage()"><ion-icon name="information"></ion-icon></button>
+		</ion-fab-list>
+	</ion-fab>
+
 </ion-content>
