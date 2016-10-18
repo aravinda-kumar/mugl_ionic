@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, FabContainer } from 'ionic-angular';
 import { AboutPage } from '../about/about';
 import { HomePage } from '../home/home';
 import { Sql, List } from "../../providers/sql";
@@ -67,7 +67,8 @@ export class ListsPage {
   -------------------------------------------------------------------------------- */
 
   // Push the about page
-  public aboutPage(): void {
+  public aboutPage(fab: FabContainer): void {
+    fab.close();
     this.navCtrl.push(AboutPage);
   }
 
@@ -85,7 +86,8 @@ export class ListsPage {
                                      UI Prompts
   -------------------------------------------------------------------------------- */
 
-  public deleteAllPrompt(): void {
+  public deleteAllPrompt(fab: FabContainer): void {
+    fab.close();
     let prompt = this.alerCtrl.create({
       title: 'Delete all lists',
       message: "Really delete all lists?",

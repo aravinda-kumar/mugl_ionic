@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, FabContainer } from 'ionic-angular';
 import { Sql, Item } from "../../providers/sql";
 
 @Component({
@@ -51,7 +51,8 @@ export class HomePage {
   }
 
   // Load sorted items from our DB
-  public loadSortedItems(): void {
+  public loadSortedItems(fab: FabContainer): void {
+    fab.close();
     this.items = [];
     this.sql.getSortedItems().then(
       data => {
@@ -101,7 +102,8 @@ export class HomePage {
                                      UI Prompts
   -------------------------------------------------------------------------------- */
 
-  public deletePrompt(): void {
+  public deletePrompt(fab: FabContainer): void {
+    fab.close();
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Delete Items',
       buttons: [

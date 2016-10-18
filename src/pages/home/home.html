@@ -25,11 +25,11 @@
 		</ion-item-sliding>
 	</ion-list>
 
-	<ion-fab right bottom>
-		<button ion-fab color="light"><ion-icon name="arrow-up"></ion-icon></button>
+	<ion-fab right bottom #fab>
+		<button ion-fab color="light"><ion-icon name="arrow-dropup"></ion-icon></button>
 		<ion-fab-list side="top">
-			<button ion-fab (click)="deletePrompt()"><ion-icon name="trash"></ion-icon></button>
-			<button ion-fab (click)="loadSortedItems()"><ion-icon name="funnel"></ion-icon></button>
+			<button ion-fab (click)="deletePrompt(fab)"><ion-icon name="trash"></ion-icon></button>
+			<button ion-fab (click)="loadSortedItems(fab)"><ion-icon name="funnel"></ion-icon></button>
 		</ion-fab-list>
 	</ion-fab>
 
