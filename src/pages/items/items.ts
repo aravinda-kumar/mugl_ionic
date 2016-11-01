@@ -3,10 +3,10 @@ import { NavController, AlertController, ActionSheetController, FabContainer } f
 import { Sql, Item } from "../../providers/sql";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-items',
+  templateUrl: 'items.html'
 })
-export class HomePage {
+export class ItemsPage {
 
   items: Item[];
   public thisListTitle: string;

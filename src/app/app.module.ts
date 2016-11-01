@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
-import { HomePage } from '../pages/home/home';
+import { ItemsPage } from '../pages/items/items';
 import { ListsPage } from '../pages/lists/lists';
 import { Sql } from "../providers/sql";
 
@@ -10,7 +10,7 @@ import { Sql } from "../providers/sql";
   declarations: [
     MyApp,
     AboutPage,
-    HomePage,
+    ItemsPage,
     ListsPage
   ],
   imports: [
@@ -20,9 +20,9 @@ import { Sql } from "../providers/sql";
   entryComponents: [
     MyApp,
     AboutPage,
-    HomePage,
+    ItemsPage,
     ListsPage
   ],
   providers: [Sql]
 })
-export class AppModule {}
+export class AppModule { }

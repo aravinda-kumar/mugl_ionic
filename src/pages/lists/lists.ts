@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, FabContainer } from 'ionic-angular';
 import { AboutPage } from '../about/about';
-import { HomePage } from '../home/home';
+import { ItemsPage } from '../items/items';
 import { Sql, List } from "../../providers/sql";
 
 @Component({
@@ -28,7 +28,7 @@ export class ListsPage {
     this.sql.whichList = list.id;
     this.sql.listName = list.list_title;
     console.log(this.sql.whichList + "");
-    this.homePage();
+    this.itemsPage();
   }
 
   // Initialize the lists by loading data from our DB
@@ -77,9 +77,9 @@ export class ListsPage {
     this.loadLists();
   }
 
-  // Push the home page
-  public homePage(): void {
-    this.navCtrl.push(HomePage);
+  // Push the items page
+  public itemsPage(): void {
+    this.navCtrl.push(ItemsPage);
   }
 
   /* -----------------------------------------------------------------------------
