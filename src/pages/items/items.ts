@@ -23,6 +23,25 @@ export class ItemsPage {
     this.sql.toggleCheckedItem(item);
   }
 
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    // this.loadItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    if (val == null || val.trim() == '') {
+      this.loadItems();
+    }
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.text.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
   public getStyle(item: Item): string {
     if (item.checked == false) {
       return "red";
