@@ -85,6 +85,7 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.0.4 16-11-05: Updated to Ionic 2.0.0rc2, search bar added for items.
 v1.0.3 16-11-01: Updated to latest Ionic build config. FABs now automatically dismiss and have improved icon.
 v1.0.2 16-10-17: FABs added; ActionSheet added for delete items prompt; sorting now works regardless of case.
 v1.0.1 16-10-16: Upgraded to Ionic 2.0.0rc1 and added splash screen.
