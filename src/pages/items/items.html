@@ -19,7 +19,7 @@
 				<ion-checkbox (click)="checkItem(item)" [(ngModel)]="item.checked" [checked]="item.checked"></ion-checkbox>
 			</ion-item>
 
-			<ion-item-options>
+			<ion-item-options side="left">
 				<button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
 				<button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
 			</ion-item-options>
