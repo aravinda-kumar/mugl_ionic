@@ -85,6 +85,8 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.0.7 16-11-17: Swipe lists from left to right to access Delete and Edit now; prevents FAB covering them.
+v1.0.6 16-11-17: Swipe items in list from left to right to access Delete and Edit now; prevents FAB covering them.
 v1.0.5 16-11-17: Updated to latest Ionic app scripts.
 v1.0.4 16-11-05: Updated to Ionic 2.0.0rc2, search bar added for items.
 v1.0.3 16-11-01: Updated to latest Ionic build config. FABs now automatically dismiss and have improved icon.
