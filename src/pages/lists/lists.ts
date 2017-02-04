@@ -157,11 +157,11 @@ export class ListsPage {
 
               this.sql.saveList(list).then((data) => {
                 // Set the automatically created id to our list
-                // list.id = data.res["insertId"];
-                list.id = data.res["id"];
+                list.id = data.res["insertId"];
+
+                this.lists.push(new List(list.id, list.list_title));
               });
             }
-            this.loadLists();
           }
         }
       ]
@@ -191,7 +191,6 @@ export class ListsPage {
             list.list_title = data.text;
 
             this.sql.updateList(list);
-            this.loadLists();
           }
         }
       ]

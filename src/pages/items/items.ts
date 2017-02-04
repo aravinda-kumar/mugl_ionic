@@ -177,11 +177,11 @@ export class ItemsPage {
 
               this.sql.saveItem(item).then((data) => {
                 // Set the automatically created id to our item
-                // item.id = data.res["insertId"];
-                item.id = data.res["id"];
+                item.id = data.res["insertId"];
+
+                this.items.push(new Item(item.text, item.id, item.checked, item.list_id));
               });
             }
-            this.loadItems();
           }
         }
       ]
@@ -211,7 +211,6 @@ export class ItemsPage {
             item.text = data.text;
 
             this.sql.updateItem(item);
-            this.loadItems();
           }
         }
       ]

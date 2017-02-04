@@ -85,13 +85,22 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.0.8 17-02-04: Insert and update for items/lists improved.
+
 v1.0.7 16-11-17: Swipe lists from left to right to access Delete and Edit now; prevents FAB covering them.
+
 v1.0.6 16-11-17: Swipe items in list from left to right to access Delete and Edit now; prevents FAB covering them.
+
 v1.0.5 16-11-17: Updated to latest Ionic app scripts.
+
 v1.0.4 16-11-05: Updated to Ionic 2.0.0rc2, search bar added for items.
+
 v1.0.3 16-11-01: Updated to latest Ionic build config. FABs now automatically dismiss and have improved icon.
+
 v1.0.2 16-10-17: FABs added; ActionSheet added for delete items prompt; sorting now works regardless of case.
+
 v1.0.1 16-10-16: Upgraded to Ionic 2.0.0rc1 and added splash screen.
+
 v1.0.0 16-09-15: Converted project to Ionic. Plan to slowly regain previous native features and possibly port to iOS. Switching versioning to semver.org. Starting with fresh Git repo.
 
 ## Contributing to MUGL
