@@ -42,14 +42,6 @@ export class ItemsPage {
     }
   }
 
-  public getStyle(item: Item): string {
-    if (item.checked == false) {
-      return "red";
-    } else {
-      return "green";
-    }
-  }
-
   public itemSelected(item: Item): void {
     this.updatePrompt(item);
   }

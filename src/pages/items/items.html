@@ -1,37 +1,32 @@
 <ion-header>
-	<ion-navbar color="primary">
-		<ion-title>{{thisListTitle}}</ion-title>
-		<ion-buttons end>
-			<button ion-button icon-only (click)="newItemPrompt()">
+  <ion-navbar color="primary">
+    <ion-title>{{thisListTitle}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="newItemPrompt()">
         <ion-icon name="add"></ion-icon>
       </button>
-		</ion-buttons>
-	</ion-navbar>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
-
-<ion-content>
-	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-	<ion-list zebra>
-		<ion-item-sliding *ngFor="let item of items">
-			<ion-item>
-				<!--<h1 [style.color]="getStyle(item)">{{item.text}}</h1>-->
-				<ion-label>{{item.text}}</ion-label>
-				<ion-checkbox (click)="checkItem(item)" [(ngModel)]="item.checked" [checked]="item.checked"></ion-checkbox>
-			</ion-item>
-
-			<ion-item-options side="left">
-				<button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
-				<button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
-			</ion-item-options>
-		</ion-item-sliding>
-	</ion-list>
-
-	<ion-fab right bottom #fab>
-		<button ion-fab color="light"><ion-icon name="arrow-dropup"></ion-icon></button>
-		<ion-fab-list side="top">
-			<button ion-fab (click)="deletePrompt(fab)"><ion-icon name="trash"></ion-icon></button>
-			<button ion-fab (click)="loadSortedItems(fab)"><ion-icon name="funnel"></ion-icon></button>
-		</ion-fab-list>
-	</ion-fab>
-
+<ion-content no-bounce>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list zebra>
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item>
+        <ion-label>{{item.text}}</ion-label>
+        <ion-checkbox (click)="checkItem(item)" [checked]="item.checked"></ion-checkbox>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button (click)="itemSelected(item)"><ion-icon name="create"></ion-icon>Edit</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom #fab>
+    <button ion-fab color="light"><ion-icon name="arrow-dropup"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="deletePrompt(fab)"><ion-icon name="trash"></ion-icon></button>
+      <button ion-fab (click)="loadSortedItems(fab)"><ion-icon name="funnel"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

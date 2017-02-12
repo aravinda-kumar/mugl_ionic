@@ -85,6 +85,8 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.0.9 17-02-12: Fixed bad bug preventing proper checking/unchecking of items, UI bounce disabled, dead code removed.
+
 v1.0.8 17-02-04: Insert and update for items/lists improved.
 
 v1.0.7 16-11-17: Swipe lists from left to right to access Delete and Edit now; prevents FAB covering them.
