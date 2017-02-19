@@ -14,7 +14,7 @@ import { Sql } from "../providers/sql";
     ListsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, { swipeBackEnabled: false })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
