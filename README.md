@@ -85,6 +85,8 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.1.1 17-02-25: Ionic 2.1.0 updates.
+
 v1.1.0 17-02-19: Yarn support added, iOS swipe back disabled.
 
 v1.0.9 17-02-12: Fixed bad bug preventing proper checking/unchecking of items, UI bounce disabled, dead code removed.
