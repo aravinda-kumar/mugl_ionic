@@ -50,6 +50,14 @@
   dependencies:
     tsickle "^0.2"
 
+"@ionic-native/core@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-3.1.1.tgz#46c76a39acb50211e3a0bc423eb7883679648672"
+
+"@ionic-native/status-bar@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/status-bar/-/status-bar-3.1.1.tgz#3d1ffa427ff6d2d8a4edd8d62af4f504671e5c10"
+
 "@ionic/app-scripts@1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@ionic/app-scripts/-/app-scripts-1.1.4.tgz#470ba1ff66d40c32681c04747c8147f3b0628e74"
@@ -1585,15 +1593,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-ionic-angular@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ionic-angular/-/ionic-angular-2.2.0.tgz#5c48212d4c491626863ddce9292af0d3e6e2adca"
-
-ionic-native@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/ionic-native/-/ionic-native-2.4.1.tgz#79ecb9ae8db33d6f208bd5d08b181960020212c5"
-  dependencies:
-    rxjs "5.0.0-beta.12"
+ionic-angular@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ionic-angular/-/ionic-angular-2.3.0.tgz#28adadbe8c54dd5eda8e113cdd18819474e42c71"
 
 ionicons@3.0.0:
   version "3.0.0"
@@ -2678,12 +2680,6 @@ rollup@0.41.4:
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.41.4.tgz#a970580176329f9ead86854d7fd4c46de752aef8"
   dependencies:
     source-map-support "^0.4.0"
-
-rxjs@5.0.0-beta.12:
-  version "5.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-beta.12.tgz#cdfde2d8c4639d20ae7794bff8fddf32da7ad337"
-  dependencies:
-    symbol-observable "^1.0.1"
 
 rxjs@5.0.1:
   version "5.0.1"

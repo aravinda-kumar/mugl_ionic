@@ -6,6 +6,8 @@ import { ItemsPage } from '../pages/items/items';
 import { ListsPage } from '../pages/lists/lists';
 import { Sql } from "../providers/sql";
 
+import { StatusBar } from '@ionic-native/status-bar';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -23,6 +25,6 @@ import { Sql } from "../providers/sql";
     ItemsPage,
     ListsPage
   ],
-  providers: [Sql]
+  providers: [Sql, StatusBar]
 })
 export class AppModule { }
