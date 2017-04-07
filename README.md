@@ -85,6 +85,8 @@ $ ionic run android # or ionic emulate ios
 
 ## Changelog
 
+v1.1.4 17-04-07: Ionic 3.0.1 updates.
+
 v1.1.3 17-03-24: Ionic 2.3.0 updates.
 
 v1.1.2 17-03-08: Ionic 2.2.0 updates.

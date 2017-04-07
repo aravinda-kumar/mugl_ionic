@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule } from 'ionic-angular';
+
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ItemsPage } from '../pages/items/items';
@@ -16,6 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar';
     ListsPage
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp, { swipeBackEnabled: false })
   ],
   bootstrap: [IonicApp],
