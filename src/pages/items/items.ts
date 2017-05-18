@@ -115,28 +115,30 @@ export class ItemsPage {
 
   public deletePrompt(fab: FabContainer): void {
     fab.close();
+
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Delete Items',
       buttons: [
         {
           text: 'Delete All',
           role: 'destructive',
-          handler: data => {
+          handler: () => {
             this.removeAllItems();
           }
         }, {
           text: 'Delete Checked',
-          handler: data => {
+          handler: () => {
             this.removeCheckedItems();
           }
         }, {
           text: 'Cancel',
           role: 'cancel',
-          handler: data => {
+          handler: () => {
           }
         }
       ]
     });
+
     actionSheet.present();
   }
 
